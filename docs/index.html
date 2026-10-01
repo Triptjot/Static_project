@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradle Beginner Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Gradle Beginner Guide</h1>
+    <p>Learn Gradle step by step</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#structure">Structure</a>
+    <a href="#commands">Commands</a>
+    <a href="#dependencies">Dependencies</a>
+    <a href="#quiz">Quiz</a>
+</nav>
+
+<main>
+
+    <section id="about">
+        <h2>What is Gradle?</h2>
+
+        <p>
+            Gradle is a build automation tool used to build, test,
+            and manage software projects.
+        </p>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Build</h3>
+                <p>Compiles your source code.</p>
+            </div>
+
+            <div class="card">
+                <h3>Test</h3>
+                <p>Runs tests automatically.</p>
+            </div>
+
+            <div class="card">
+                <h3>Dependencies</h3>
+                <p>Manages external libraries.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="structure">
+        <h2>Gradle Project Structure</h2>
+
+        <div class="file-tree">
+            <button onclick="showFile('build')">
+                📄 build.gradle
+            </button>
+
+            <button onclick="showFile('settings')">
+                📄 settings.gradle
+            </button>
+
+            <button onclick="showFile('src')">
+                📁 src/
+            </button>
+
+            <button onclick="showFile('gradlew')">
+                📄 gradlew
+            </button>
+        </div>
+
+        <div id="fileInfo" class="info">
+            Click a file to learn more.
+        </div>
+    </section>
+
+    <section id="commands">
+        <h2>Common Gradle Commands</h2>
+
+        <button onclick="showCommand('build')">Build</button>
+        <button onclick="showCommand('test')">Test</button>
+        <button onclick="showCommand('clean')">Clean</button>
+        <button onclick="showCommand('tasks')">Tasks</button>
+
+        <div id="commandOutput" class="terminal">
+            Select a command.
+        </div>
+    </section>
+
+    <section id="dependencies">
+        <h2>Dependencies</h2>
+
+        <p>
+            Dependencies are external libraries that your project uses.
+        </p>
+
+        <pre>
+dependencies {
+    implementation 'com.google.guava:guava:33.0.0-jre'
+}</pre>
+
+        <button onclick="toggleDependency()">
+            Explain this
+        </button>
+
+        <div id="dependencyInfo" class="info hidden">
+            <p>
+                <strong>implementation</strong> tells Gradle that your
+                application needs the library.
+            </p>
+
+            <p>
+                <strong>guava</strong> is the library name and
+                <strong>33.0.0-jre</strong> is its version.
+            </p>
+        </div>
+    </section>
+
+    <section id="quiz">
+        <h2>Quick Quiz</h2>
+
+        <p><strong>What is Gradle mainly used for?</strong></p>
+
+        <button class="answer" onclick="checkAnswer(false)">
+            Creating images
+        </button>
+
+        <button class="answer" onclick="checkAnswer(true)">
+            Automating builds
+        </button>
+
+        <button class="answer" onclick="checkAnswer(false)">
+            Browsing websites
+        </button>
+
+        <p id="quizResult"></p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Gradle Beginner Guide</p>
+</footer>
+
+<script>
+    function showFile(file) {
+        const info = document.getElementById("fileInfo");
+
+        const files = {
+            build:
+                "<strong>build.gradle</strong><br>Contains build configuration, plugins, dependencies and tasks.",
+
+            settings:
+                "<strong>settings.gradle</strong><br>Defines project-level settings and project modules.",
+
+            src:
+                "<strong>src/</strong><br>Contains the source code and resources of your application.",
+
+            gradlew:
+                "<strong>gradlew</strong><br>The Gradle Wrapper that lets you run the Gradle version configured for the project."
+        };
+
+        info.innerHTML = files[file];
+        info.classList.remove("hidden");
+    }
+
+    function showCommand(command) {
+        const output = document.getElementById("commandOutput");
+
+        const commands = {
+            build: [
+                "./gradlew build",
+                "Builds the project and runs the required tasks."
+            ],
+
+            test: [
+                "./gradlew test",
+                "Runs the tests in your project."
+            ],
+
+            clean: [
+                "./gradlew clean",
+                "Deletes the build directory."
+            ],
+
+            tasks: [
+                "./gradlew tasks",
+                "Shows the available Gradle tasks."
+            ]
+        };
+
+        output.innerHTML =
+            "<strong>" +
+            commands[command][0] +
+            "</strong><br><br>" +
+            commands[command][1];
+    }
+
+    function toggleDependency() {
+        const info = document.getElementById("dependencyInfo");
+
+        info.classList.toggle("hidden");
+    }
+
+    function checkAnswer(correct) {
+        const result = document.getElementById("quizResult");
+
+        if (correct) {
+            result.textContent =
+                "✓ Correct! Gradle is a build automation tool.";
+            result.className = "correct";
+        } else {
+            result.textContent =
+                "✗ Try again. Gradle is mainly used for build automation.";
+            result.className = "wrong";
+        }
+    }
+</script>
+
+</body>
+</html>
